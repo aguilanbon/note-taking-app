@@ -5,8 +5,18 @@ class NotesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('List'),
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add-edit-note');
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [Text('sdsd')],
+        ),
+      ),
     );
   }
 }

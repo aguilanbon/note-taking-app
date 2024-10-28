@@ -5,8 +5,12 @@ class AddEditNoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('AddEdit'),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [Text('add')],
+        ),
+      ),
     );
   }
 }
