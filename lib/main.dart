@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_taking_app/cubit/notes_cubit.dart';
 import 'package:note_taking_app/pages/note_list_screen.dart';
 import 'package:note_taking_app/routes/routes.dart';
 
@@ -13,7 +15,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: AppRoutes.routes,
-      home: const NotesListScreen(),
+      home: BlocProvider<NotesCubit>(
+        create: (context) => NotesCubit(),
+        child: const NotesListScreen(),
+      ),
     );
   }
 }
