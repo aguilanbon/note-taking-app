@@ -27,6 +27,7 @@ class NotesCubit extends Cubit<NotesState> {
     emit(const NotesState.loading());
 
     try {
+      await Future.delayed(Duration(seconds: 2));
       final notes = await _notesService.fetchNotesFromCache();
       emit(NotesState.loaded(notes: notes));
     } catch (e) {
@@ -71,7 +72,6 @@ class NotesCubit extends Cubit<NotesState> {
 
   /// Delete note
   Future<void> deleteNote(String id) async {
-    print(id);
     emit(const NotesState.loading());
     try {
       final updatedNotesList = await _notesService.deleteNote(id);

@@ -17,7 +17,7 @@ class NotesServices {
         jsonDecode(response.body);
         final notes =
             (data as List).map((json) => Note.fromJson(json)).toList();
-        cacheNotes(notes);
+        _cacheNotes(notes);
         return notes;
       } else {
         throw Exception('Failed to load notes');
@@ -35,11 +35,6 @@ class NotesServices {
       return decodedData.map((json) => Note.fromJson(json)).toList();
     }
     return [];
-  }
-
-  Future<void> cacheNotes(List<Note> notes) async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString(cacheKey, jsonEncode(notes));
   }
 
   Future<Note?> fetchNoteById(String id) async {
@@ -94,5 +89,10 @@ class NotesServices {
     } else {
       return [];
     }
+  }
+
+  Future<void> _cacheNotes(List<Note> notes) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(cacheKey, jsonEncode(notes));
   }
 }

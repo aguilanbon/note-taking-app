@@ -18,41 +18,46 @@ class NoteDetailScreen extends StatelessWidget {
         title: 'View',
         showBackButton: true,
       ),
-      body: BlocBuilder<NotesCubit, NotesState>(
-        builder: (context, state) {
-          return state.maybeWhen(
-            initial: () {
-              return const Center(
-                child: CircularProgressIndicator.adaptive(),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: BlocBuilder<NotesCubit, NotesState>(
+            builder: (context, state) {
+              return state.maybeWhen(
+                initial: () {
+                  return const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  );
+                },
+                loading: () => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                view: (note) {
+                  if (note != null) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(note.title,
+                              style: Theme.of(context).textTheme.headlineLarge),
+                          const SizedBox(height: 8),
+                          Text(note.content),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Center(child: Text('Note not found.'));
+                  }
+                },
+                error: (message) => Center(
+                  child: Text(message),
+                ),
+                orElse: () => const SizedBox.shrink(),
               );
             },
-            loading: () => const Center(
-              child: CircularProgressIndicator.adaptive(),
-            ),
-            view: (note) {
-              if (note != null) {
-                return Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(note.title,
-                          style: Theme.of(context).textTheme.headlineLarge),
-                      const SizedBox(height: 8),
-                      Text(note.content),
-                    ],
-                  ),
-                );
-              } else {
-                return const Center(child: Text('Note not found.'));
-              }
-            },
-            error: (message) => Center(
-              child: Text(message),
-            ),
-            orElse: () => const SizedBox.shrink(),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

@@ -24,82 +24,97 @@ class AddEditNoteScreen extends StatelessWidget {
         showBackButton: true,
       ),
       body: SafeArea(
-        child: BlocConsumer<NotesCubit, NotesState>(
-          listener: (context, state) {
-            state.maybeWhen(
-                loaded: (_, didUpdate) {
-                  if (didUpdate != null) {
-                    if (didUpdate) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Successfully updated note!')),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                            content: Text('Successfully added note!')),
-                      );
-                      _titleController.clear();
-                      _contentController.clear();
-                    }
-                  }
-                },
-                orElse: () {});
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _titleController,
-                    decoration: const InputDecoration(
-                      labelText: 'Title',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  TextFormField(
-                    controller: _contentController,
-                    maxLines: 5,
-                    decoration: const InputDecoration(
-                      labelText: 'Content',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      final title = _titleController.text;
-                      final content = _contentController.text;
-
-                      if (title.isNotEmpty && content.isNotEmpty) {
-                        final newNote = Note(
-                          id: note != null
-                              ? note!.id
-                              : DateTime.now().toString(),
-                          title: title,
-                          content: content,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: BlocConsumer<NotesCubit, NotesState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                  loaded: (_, didUpdate) {
+                    if (didUpdate != null) {
+                      if (didUpdate) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Successfully updated note!')),
                         );
-                        if (note != null) {
-                          context.read<NotesCubit>().updateNote(newNote);
-                        } else {
-                          context.read<NotesCubit>().addNote(newNote);
-                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content:
-                                  Text('Title and content cannot be empty')),
+                              content: Text('Successfully added note!')),
                         );
+                        _titleController.clear();
+                        _contentController.clear();
                       }
-                    },
-                    child: const Text('Save'),
-                  ),
-                ],
-              ),
-            );
-          },
+                    }
+                  },
+                  orElse: () {});
+            },
+            builder: (context, state) {
+              return Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      controller: _titleController,
+                      decoration: const InputDecoration(
+                        labelText: 'Title',
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      controller: _contentController,
+                      maxLines: 5,
+                      decoration: const InputDecoration(
+                        labelText: 'Content',
+                        border: OutlineInputBorder(),
+                        fillColor: Colors.white,
+                        filled: true,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 40,
+                      width: 200,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final title = _titleController.text;
+                          final content = _contentController.text;
+                          if (title.isNotEmpty && content.isNotEmpty) {
+                            final newNote = Note(
+                              id: note != null
+                                  ? note!.id
+                                  : DateTime.now().toString(),
+                              title: title,
+                              content: content,
+                            );
+                            if (note != null) {
+                              context.read<NotesCubit>().updateNote(newNote);
+                            } else {
+                              context.read<NotesCubit>().addNote(newNote);
+                            }
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text(
+                                      'Title and content cannot be empty')),
+                            );
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        child: const Text('Save'),
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
