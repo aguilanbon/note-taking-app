@@ -6,6 +6,6 @@ class AppRoutes {
   static final routes = {
     '/notes': (context) => const NotesListScreen(),
     '/note': (context) => const NoteDetailScreen(),
-    '/add-edit-note': (context) => const AddEditNoteScreen(),
+    '/add-edit-note': (context) => AddEditNoteScreen(),
   };
 }
