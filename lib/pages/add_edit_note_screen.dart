@@ -82,15 +82,24 @@ class AddEditNoteScreen extends StatelessWidget {
                           final title = _titleController.text;
                           final content = _contentController.text;
                           if (title.isNotEmpty && content.isNotEmpty) {
-                            final newNote = Note(
-                              id: note != null
-                                  ? note!.id
-                                  : DateTime.now().toString(),
-                              title: title,
-                              content: content,
-                            );
+                            final newNote = note?.copyWith(
+                                  title: title,
+                                  content: content,
+                                ) ??
+                                Note(
+                                  id: DateTime.now().toString(),
+                                  title: title,
+                                  content: content,
+                                );
                             if (note != null) {
-                              context.read<NotesCubit>().updateNote(newNote);
+                              if (note == newNote) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text('Nothing changed!')),
+                                );
+                              } else {
+                                context.read<NotesCubit>().updateNote(newNote);
+                              }
                             } else {
                               context.read<NotesCubit>().addNote(newNote);
                             }

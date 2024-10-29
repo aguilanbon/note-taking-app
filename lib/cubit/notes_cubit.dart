@@ -27,7 +27,7 @@ class NotesCubit extends Cubit<NotesState> {
     emit(const NotesState.loading());
 
     try {
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(milliseconds: 500));
       final notes = await _notesService.fetchNotesFromCache();
       emit(NotesState.loaded(notes: notes));
     } catch (e) {
