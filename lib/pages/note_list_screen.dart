@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
 
 class NotesListScreen extends StatelessWidget {
@@ -7,10 +8,13 @@ class NotesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // WidgetsBinding.instance.addPostFrameCallback((_) {
+    //   context.read<NotesCubit>().getNotesFromCache();
+    // });
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/add-edit-note');
+            context.go('/add-edit-note');
           },
           child: const Icon(Icons.add),
         ),
@@ -19,7 +23,6 @@ class NotesListScreen extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                 initial: () {
-                  context.read<NotesCubit>().getNotesFromCache();
                   return const Center(
                     child: CircularProgressIndicator.adaptive(),
                   );
@@ -27,7 +30,7 @@ class NotesListScreen extends StatelessWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-                loaded: (notes) {
+                loaded: (notes, _) {
                   if (notes.isEmpty) {
                     return const Center(
                       child: Text(
@@ -92,7 +95,9 @@ class NotesListScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            onTap: () {},
+                            onTap: () {
+                              context.go('/note/${note.id}');
+                            },
                           ),
                         );
                       },

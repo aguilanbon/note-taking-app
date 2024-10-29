@@ -57,4 +57,18 @@ class NotesServices {
       return [note];
     }
   }
+
+  Future<Note?> fetchNoteById(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString(cacheKey);
+    if (cachedData != null) {
+      final List<dynamic> decodedData = jsonDecode(cachedData);
+      final note = decodedData.firstWhere((element) => element['id'] == id,
+          orElse: () => null);
+      if (note != null) {
+        return Note.fromJson(note);
+      }
+    }
+    return null;
+  }
 }

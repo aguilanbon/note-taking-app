@@ -6,14 +6,26 @@ import 'package:note_taking_app/models/note.dart';
 class AddEditNoteScreen extends StatelessWidget {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
+  final Note? note;
 
-  AddEditNoteScreen({super.key});
+  AddEditNoteScreen({super.key, this.note});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<NotesCubit, NotesState>(
+        child: BlocConsumer<NotesCubit, NotesState>(
+          listener: (context, state) {
+            state.maybeWhen(
+                loaded: (notes, _) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Successfully added note!')),
+                  );
+                  _titleController.clear();
+                  _contentController.clear();
+                },
+                orElse: () {});
+          },
           builder: (context, state) {
             return Padding(
               padding: const EdgeInsets.all(16.0),

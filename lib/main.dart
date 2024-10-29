@@ -15,9 +15,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<NotesCubit>(
       create: (context) => NotesCubit(NotesServices())..getInitNotes(),
-      child: MaterialApp(
-        routes: AppRoutes.routes,
-        initialRoute: '/notes',
+      child: MaterialApp.router(
+        routerConfig: AppRoutes.router,
+        debugShowCheckedModeBanner: false,
       ),
     );
   }

@@ -24,6 +24,7 @@ class NotesCubit extends Cubit<NotesState> {
 
   /// Fetch notes from localStorage cache
   Future<void> getNotesFromCache() async {
+    print('runn');
     emit(const NotesState.loading());
 
     try {
@@ -40,6 +41,17 @@ class NotesCubit extends Cubit<NotesState> {
     try {
       final updatedNotesList = await _notesService.createNote(note);
       emit(NotesState.loaded(notes: updatedNotesList));
+    } catch (e) {
+      emit(NotesState.error(message: e.toString()));
+    }
+  }
+
+  /// Fetch a single note
+  Future<void> getNoteById(String id) async {
+    emit(const NotesState.loading());
+    try {
+      final note = await _notesService.fetchNoteById(id);
+      emit(NotesState.loaded(notes: [], viewingNote: note));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));
     }
