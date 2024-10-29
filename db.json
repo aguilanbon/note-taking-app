@@ -1,12 +1,14 @@
-[
-    {
-    "id": "2024-10-29 08:40:17.292",
-    "title": "First Note",
-    "content": "First Content"
-    },
-    {
-    "id": "2024-10-29 08:40:17.300",
-    "title": "Second Note",
-    "content": "Second Content"
-    }
-]
+{
+    "notes": [
+        {
+        "id": "2024-10-29 08:40:17.292",
+        "title": "First Note",
+        "content": "First Content"
+        },
+        {
+        "id": "2024-10-29 08:40:17.300",
+        "title": "Second Note",
+        "content": "Second Content"
+        }
+    ]
+}
