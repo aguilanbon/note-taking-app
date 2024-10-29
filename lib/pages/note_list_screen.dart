@@ -19,7 +19,7 @@ class NotesListScreen extends StatelessWidget {
             builder: (context, state) {
               return state.when(
                 initial: () {
-                  context.read<NotesCubit>().getNotes();
+                  context.read<NotesCubit>().getNotesFromCache();
                   return const Center(
                     child: CircularProgressIndicator.adaptive(),
                   );
@@ -39,7 +39,7 @@ class NotesListScreen extends StatelessWidget {
 
                   return RefreshIndicator(
                     onRefresh: () async {
-                      await context.read<NotesCubit>().getNotes();
+                      await context.read<NotesCubit>().getNotesFromCache();
                     },
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),

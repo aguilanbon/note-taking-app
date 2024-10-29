@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
-import 'package:note_taking_app/pages/note_list_screen.dart';
 import 'package:note_taking_app/routes/routes.dart';
 import 'package:note_taking_app/services/notes_services.dart';
 
@@ -14,11 +13,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: AppRoutes.routes,
-      home: BlocProvider<NotesCubit>(
-        create: (context) => NotesCubit(NotesServices()),
-        child: const NotesListScreen(),
+    return BlocProvider<NotesCubit>(
+      create: (context) => NotesCubit(NotesServices())..getInitNotes(),
+      child: MaterialApp(
+        routes: AppRoutes.routes,
+        initialRoute: '/notes',
       ),
     );
   }

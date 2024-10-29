@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:http/http.dart';
 import 'package:note_taking_app/models/note.dart';
 import 'package:note_taking_app/services/notes_services.dart';
 
@@ -14,12 +11,35 @@ class NotesCubit extends Cubit<NotesState> {
 
   NotesCubit(this._notesService) : super(const NotesState.initial());
 
-  Future<void> getNotes() async {
+  /// Fetch initial mock data of notes from a mock api
+  Future<void> getInitNotes() async {
     emit(const NotesState.loading());
-
     try {
       final notes = await _notesService.fetchNotes();
       emit(NotesState.loaded(notes: notes));
+    } catch (e) {
+      emit(NotesState.error(message: e.toString()));
+    }
+  }
+
+  /// Fetch notes from localStorage cache
+  Future<void> getNotesFromCache() async {
+    emit(const NotesState.loading());
+
+    try {
+      final notes = await _notesService.fetchNotesFromCache();
+      emit(NotesState.loaded(notes: notes));
+    } catch (e) {
+      emit(NotesState.error(message: e.toString()));
+    }
+  }
+
+  /// Add note
+  Future<void> addNote(Note note) async {
+    emit(const NotesState.loading());
+    try {
+      final updatedNotesList = await _notesService.createNote(note);
+      emit(NotesState.loaded(notes: updatedNotesList));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));
     }
