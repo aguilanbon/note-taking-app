@@ -88,10 +88,10 @@ class NotesListScreen extends StatelessWidget {
                                           ),
                                           TextButton(
                                             onPressed: () {
-                                              // Navigator.pop(context);
-                                              // context
-                                              //     .read<NotesCubit>()
-                                              //     .deleteNote(note.id);
+                                              Navigator.pop(context);
+                                              context
+                                                  .read<NotesCubit>()
+                                                  .deleteNote(note.id);
                                             },
                                             child: const Text(
                                               'Delete',

@@ -78,4 +78,21 @@ class NotesServices {
       return [note];
     }
   }
+
+  Future<List<Note>> deleteNote(String id) async {
+    final prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString(cacheKey);
+    if (cachedData != null) {
+      final List<dynamic> decodedData = jsonDecode(cachedData);
+      final List<Note> notes =
+          decodedData.map((json) => Note.fromJson(json)).toList();
+
+      notes.removeWhere((element) => element.id == id);
+
+      prefs.setString(cacheKey, jsonEncode(notes));
+      return notes;
+    } else {
+      return [];
+    }
+  }
 }
