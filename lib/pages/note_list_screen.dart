@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:note_taking_app/components/custom_appbar.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
 
 class NotesListScreen extends StatelessWidget {
@@ -12,6 +13,10 @@ class NotesListScreen extends StatelessWidget {
       context.read<NotesCubit>().getNotesFromCache();
     });
     return Scaffold(
+        appBar: const CustomAppBar(
+          title: 'Note Taking App',
+          showLogo: true,
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             context.go('/add-edit-note');

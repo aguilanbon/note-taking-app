@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_taking_app/components/custom_appbar.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
 
 class NoteDetailScreen extends StatelessWidget {
@@ -13,6 +14,10 @@ class NoteDetailScreen extends StatelessWidget {
       context.read<NotesCubit>().getNoteById(id);
     });
     return Scaffold(
+      appBar: const CustomAppBar(
+        title: 'View',
+        showBackButton: true,
+      ),
       body: BlocBuilder<NotesCubit, NotesState>(
         builder: (context, state) {
           return state.maybeWhen(

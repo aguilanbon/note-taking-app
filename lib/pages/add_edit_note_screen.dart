@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:note_taking_app/components/custom_appbar.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
 import 'package:note_taking_app/models/note.dart';
 
@@ -18,6 +19,10 @@ class AddEditNoteScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      appBar: CustomAppBar(
+        title: note != null ? 'Edit Note' : 'New Note',
+        showBackButton: true,
+      ),
       body: SafeArea(
         child: BlocConsumer<NotesCubit, NotesState>(
           listener: (context, state) {

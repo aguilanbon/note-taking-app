@@ -16,6 +16,10 @@ class MainApp extends StatelessWidget {
     return BlocProvider<NotesCubit>(
       create: (context) => NotesCubit(NotesServices())..getInitNotes(),
       child: MaterialApp.router(
+        theme: ThemeData(
+          primaryColor: Colors.blueAccent,
+          scaffoldBackgroundColor: const Color.fromARGB(255, 235, 226, 226),
+        ),
         routerConfig: AppRoutes.router,
         debugShowCheckedModeBanner: false,
       ),
