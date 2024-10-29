@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:note_taking_app/cubit/notes_cubit.dart';
 import 'package:note_taking_app/pages/note_list_screen.dart';
 import 'package:note_taking_app/routes/routes.dart';
+import 'package:note_taking_app/services/notes_services.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       routes: AppRoutes.routes,
       home: BlocProvider<NotesCubit>(
-        create: (context) => NotesCubit(),
+        create: (context) => NotesCubit(NotesServices()),
         child: const NotesListScreen(),
       ),
     );
