@@ -12,15 +12,20 @@ class AddEditNoteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (note != null) {
+      _titleController.text = note!.title;
+      _contentController.text = note!.content;
+    }
+
     return Scaffold(
       body: SafeArea(
         child: BlocConsumer<NotesCubit, NotesState>(
           listener: (context, state) {
             state.maybeWhen(
                 loaded: (notes, _) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Successfully added note!')),
-                  );
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   const SnackBar(content: Text('Successfully added note!')),
+                  // );
                   _titleController.clear();
                   _contentController.clear();
                 },
@@ -55,11 +60,17 @@ class AddEditNoteScreen extends StatelessWidget {
 
                       if (title.isNotEmpty && content.isNotEmpty) {
                         final newNote = Note(
-                          id: DateTime.now().toString(),
+                          id: note != null
+                              ? note!.id
+                              : DateTime.now().toString(),
                           title: title,
                           content: content,
                         );
-                        context.read<NotesCubit>().addNote(newNote);
+                        if (note != null) {
+                          context.read<NotesCubit>().updateNote(newNote);
+                        } else {
+                          context.read<NotesCubit>().addNote(newNote);
+                        }
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

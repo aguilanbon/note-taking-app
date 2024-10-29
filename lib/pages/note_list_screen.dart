@@ -8,9 +8,9 @@ class NotesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // WidgetsBinding.instance.addPostFrameCallback((_) {
-    //   context.read<NotesCubit>().getNotesFromCache();
-    // });
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<NotesCubit>().getNotesFromCache();
+    });
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -63,37 +63,48 @@ class NotesListScreen extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete),
-                              onPressed: () {
-                                // Show confirmation dialog before deleting
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: const Text('Delete Note'),
-                                    content: const Text(
-                                        'Are you sure you want to delete this note?'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context),
-                                        child: const Text('Cancel'),
+                            trailing: Wrap(
+                              children: [
+                                IconButton(
+                                    icon: const Icon(Icons.edit),
+                                    onPressed: () {
+                                      context.go('/add-edit-note', extra: note);
+                                    }),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    // Show confirmation dialog before deleting
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text('Delete Note'),
+                                        content: const Text(
+                                            'Are you sure you want to delete this note?'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () =>
+                                                Navigator.pop(context),
+                                            child: const Text('Cancel'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              // Navigator.pop(context);
+                                              // context
+                                              //     .read<NotesCubit>()
+                                              //     .deleteNote(note.id);
+                                            },
+                                            child: const Text(
+                                              'Delete',
+                                              style:
+                                                  TextStyle(color: Colors.red),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Navigator.pop(context);
-                                          // context
-                                          //     .read<NotesCubit>()
-                                          //     .deleteNote(note.id);
-                                        },
-                                        child: const Text(
-                                          'Delete',
-                                          style: TextStyle(color: Colors.red),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                             onTap: () {
                               context.go('/note/${note.id}');

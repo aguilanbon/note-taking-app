@@ -71,4 +71,27 @@ class NotesServices {
     }
     return null;
   }
+
+  Future<List<Note>> updateNote(Note note) async {
+    final prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString(cacheKey);
+    if (cachedData != null) {
+      final List<dynamic> decodedData = jsonDecode(cachedData);
+      final List<Note> notes =
+          decodedData.map((json) => Note.fromJson(json)).toList();
+
+      final index = notes.indexWhere((element) => element.id == note.id);
+      if (index != -1) {
+        notes[index] = note;
+      } else {
+        notes.add(note);
+      }
+
+      prefs.setString(cacheKey, jsonEncode(notes));
+      return notes;
+    } else {
+      prefs.setString(cacheKey, jsonEncode([note]));
+      return [note];
+    }
+  }
 }

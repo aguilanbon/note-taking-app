@@ -56,4 +56,15 @@ class NotesCubit extends Cubit<NotesState> {
       emit(NotesState.error(message: e.toString()));
     }
   }
+
+  /// Update note
+  Future<void> updateNote(Note note) async {
+    emit(const NotesState.loading());
+    try {
+      final updatedNotesList = await _notesService.updateNote(note);
+      emit(NotesState.loaded(notes: updatedNotesList));
+    } catch (e) {
+      emit(NotesState.error(message: e.toString()));
+    }
+  }
 }
