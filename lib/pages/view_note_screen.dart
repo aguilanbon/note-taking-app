@@ -24,7 +24,7 @@ class NoteDetailScreen extends StatelessWidget {
             loading: () => const Center(
               child: CircularProgressIndicator.adaptive(),
             ),
-            loaded: (_, note) {
+            loaded: (_, note, __) {
               if (note != null) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),

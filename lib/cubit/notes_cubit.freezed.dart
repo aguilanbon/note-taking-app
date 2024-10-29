@@ -20,7 +20,9 @@ mixin _$NotesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Note> notes, Note? viewingNote) loaded,
+    required TResult Function(
+            List<Note> notes, Note? viewingNote, bool? didUpdate)
+        loaded,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +30,8 @@ mixin _$NotesState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +39,8 @@ mixin _$NotesState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -132,7 +136,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Note> notes, Note? viewingNote) loaded,
+    required TResult Function(
+            List<Note> notes, Note? viewingNote, bool? didUpdate)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -143,7 +149,8 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -154,7 +161,8 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -249,7 +257,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Note> notes, Note? viewingNote) loaded,
+    required TResult Function(
+            List<Note> notes, Note? viewingNote, bool? didUpdate)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return loading();
@@ -260,7 +270,8 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return loading?.call();
@@ -271,7 +282,8 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -329,7 +341,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Note> notes, Note? viewingNote});
+  $Res call({List<Note> notes, Note? viewingNote, bool? didUpdate});
 
   $NoteCopyWith<$Res>? get viewingNote;
 }
@@ -349,6 +361,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? notes = null,
     Object? viewingNote = freezed,
+    Object? didUpdate = freezed,
   }) {
     return _then(_$LoadedImpl(
       notes: null == notes
@@ -359,6 +372,10 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value.viewingNote
           : viewingNote // ignore: cast_nullable_to_non_nullable
               as Note?,
+      didUpdate: freezed == didUpdate
+          ? _value.didUpdate
+          : didUpdate // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 
@@ -380,7 +397,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required final List<Note> notes, this.viewingNote})
+  const _$LoadedImpl(
+      {required final List<Note> notes, this.viewingNote, this.didUpdate})
       : _notes = notes;
 
   final List<Note> _notes;
@@ -393,10 +411,12 @@ class _$LoadedImpl implements _Loaded {
 
   @override
   final Note? viewingNote;
+  @override
+  final bool? didUpdate;
 
   @override
   String toString() {
-    return 'NotesState.loaded(notes: $notes, viewingNote: $viewingNote)';
+    return 'NotesState.loaded(notes: $notes, viewingNote: $viewingNote, didUpdate: $didUpdate)';
   }
 
   @override
@@ -406,12 +426,14 @@ class _$LoadedImpl implements _Loaded {
             other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._notes, _notes) &&
             (identical(other.viewingNote, viewingNote) ||
-                other.viewingNote == viewingNote));
+                other.viewingNote == viewingNote) &&
+            (identical(other.didUpdate, didUpdate) ||
+                other.didUpdate == didUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_notes), viewingNote);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_notes), viewingNote, didUpdate);
 
   /// Create a copy of NotesState
   /// with the given fields replaced by the non-null parameter values.
@@ -426,10 +448,12 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Note> notes, Note? viewingNote) loaded,
+    required TResult Function(
+            List<Note> notes, Note? viewingNote, bool? didUpdate)
+        loaded,
     required TResult Function(String message) error,
   }) {
-    return loaded(notes, viewingNote);
+    return loaded(notes, viewingNote, didUpdate);
   }
 
   @override
@@ -437,10 +461,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
-    return loaded?.call(notes, viewingNote);
+    return loaded?.call(notes, viewingNote, didUpdate);
   }
 
   @override
@@ -448,12 +473,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(notes, viewingNote);
+      return loaded(notes, viewingNote, didUpdate);
     }
     return orElse();
   }
@@ -499,10 +525,12 @@ class _$LoadedImpl implements _Loaded {
 abstract class _Loaded implements NotesState {
   const factory _Loaded(
       {required final List<Note> notes,
-      final Note? viewingNote}) = _$LoadedImpl;
+      final Note? viewingNote,
+      final bool? didUpdate}) = _$LoadedImpl;
 
   List<Note> get notes;
   Note? get viewingNote;
+  bool? get didUpdate;
 
   /// Create a copy of NotesState
   /// with the given fields replaced by the non-null parameter values.
@@ -581,7 +609,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<Note> notes, Note? viewingNote) loaded,
+    required TResult Function(
+            List<Note> notes, Note? viewingNote, bool? didUpdate)
+        loaded,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -592,7 +622,8 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -603,7 +634,8 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote)? loaded,
+    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
+        loaded,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

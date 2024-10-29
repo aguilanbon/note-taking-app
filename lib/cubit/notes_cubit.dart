@@ -24,7 +24,6 @@ class NotesCubit extends Cubit<NotesState> {
 
   /// Fetch notes from localStorage cache
   Future<void> getNotesFromCache() async {
-    print('runn');
     emit(const NotesState.loading());
 
     try {
@@ -39,8 +38,8 @@ class NotesCubit extends Cubit<NotesState> {
   Future<void> addNote(Note note) async {
     emit(const NotesState.loading());
     try {
-      final updatedNotesList = await _notesService.createNote(note);
-      emit(NotesState.loaded(notes: updatedNotesList));
+      final updatedNotesList = await _notesService.createOrUpdateNote(note);
+      emit(NotesState.loaded(notes: updatedNotesList, didUpdate: false));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));
     }
@@ -51,7 +50,10 @@ class NotesCubit extends Cubit<NotesState> {
     emit(const NotesState.loading());
     try {
       final note = await _notesService.fetchNoteById(id);
-      emit(NotesState.loaded(notes: [], viewingNote: note));
+      emit(NotesState.loaded(
+        notes: [],
+        viewingNote: note,
+      ));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));
     }
@@ -61,8 +63,8 @@ class NotesCubit extends Cubit<NotesState> {
   Future<void> updateNote(Note note) async {
     emit(const NotesState.loading());
     try {
-      final updatedNotesList = await _notesService.updateNote(note);
-      emit(NotesState.loaded(notes: updatedNotesList));
+      final updatedNotesList = await _notesService.createOrUpdateNote(note);
+      emit(NotesState.loaded(notes: updatedNotesList, didUpdate: true));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));
     }

@@ -42,22 +42,6 @@ class NotesServices {
     prefs.setString(cacheKey, jsonEncode(notes));
   }
 
-  Future<List<Note>> createNote(Note note) async {
-    final prefs = await SharedPreferences.getInstance();
-    final cachedData = prefs.getString(cacheKey);
-    if (cachedData != null) {
-      final List<dynamic> decodedData = jsonDecode(cachedData);
-      final List<Note> notes =
-          decodedData.map((json) => Note.fromJson(json)).toList();
-      notes.add(note);
-      prefs.setString(cacheKey, jsonEncode(notes));
-      return notes;
-    } else {
-      prefs.setString(cacheKey, jsonEncode([note]));
-      return [note];
-    }
-  }
-
   Future<Note?> fetchNoteById(String id) async {
     final prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString(cacheKey);
@@ -72,7 +56,7 @@ class NotesServices {
     return null;
   }
 
-  Future<List<Note>> updateNote(Note note) async {
+  Future<List<Note>> createOrUpdateNote(Note note) async {
     final prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString(cacheKey);
     if (cachedData != null) {

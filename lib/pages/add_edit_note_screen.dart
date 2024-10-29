@@ -22,12 +22,22 @@ class AddEditNoteScreen extends StatelessWidget {
         child: BlocConsumer<NotesCubit, NotesState>(
           listener: (context, state) {
             state.maybeWhen(
-                loaded: (notes, _) {
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(content: Text('Successfully added note!')),
-                  // );
-                  _titleController.clear();
-                  _contentController.clear();
+                loaded: (_, __, didUpdate) {
+                  if (didUpdate != null) {
+                    if (didUpdate) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Successfully updated note!')),
+                      );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Successfully added note!')),
+                      );
+                      _titleController.clear();
+                      _contentController.clear();
+                    }
+                  }
                 },
                 orElse: () {});
           },

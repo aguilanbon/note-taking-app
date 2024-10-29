@@ -30,7 +30,7 @@ class NotesListScreen extends StatelessWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-                loaded: (notes, _) {
+                loaded: (notes, _, __) {
                   if (notes.isEmpty) {
                     return const Center(
                       child: Text(
