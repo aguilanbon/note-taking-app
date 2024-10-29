@@ -74,51 +74,7 @@ class AddEditNoteScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    SizedBox(
-                      height: 40,
-                      width: 200,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final title = _titleController.text;
-                          final content = _contentController.text;
-                          if (title.isNotEmpty && content.isNotEmpty) {
-                            final newNote = note?.copyWith(
-                                  title: title,
-                                  content: content,
-                                ) ??
-                                Note(
-                                  id: DateTime.now().toString(),
-                                  title: title,
-                                  content: content,
-                                );
-                            if (note != null) {
-                              if (note == newNote) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Nothing changed!')),
-                                );
-                              } else {
-                                context.read<NotesCubit>().updateNote(newNote);
-                              }
-                            } else {
-                              context.read<NotesCubit>().addNote(newNote);
-                            }
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text(
-                                      'Title and content cannot be empty')),
-                            );
-                          }
-                        },
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        child: const Text('Save'),
-                      ),
-                    )
+                    saveButtonBuilder(),
                   ],
                 ),
               );
@@ -126,6 +82,61 @@ class AddEditNoteScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  saveButtonBuilder() {
+    return BlocBuilder<NotesCubit, NotesState>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          loading: () => const CircularProgressIndicator.adaptive(),
+          orElse: () {
+            return SizedBox(
+              height: 40,
+              width: 200,
+              child: ElevatedButton(
+                onPressed: () {
+                  final title = _titleController.text;
+                  final content = _contentController.text;
+                  if (title.isNotEmpty && content.isNotEmpty) {
+                    final newNote = note?.copyWith(
+                          title: title,
+                          content: content,
+                        ) ??
+                        Note(
+                          id: DateTime.now().toString(),
+                          title: title,
+                          content: content,
+                        );
+                    if (note != null) {
+                      if (note == newNote) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text('Nothing changed!')),
+                        );
+                      } else {
+                        context.read<NotesCubit>().updateNote(newNote);
+                      }
+                    } else {
+                      context.read<NotesCubit>().addNote(newNote);
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Title and content cannot be empty')),
+                    );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Save'),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }

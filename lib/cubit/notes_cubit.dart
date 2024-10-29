@@ -39,6 +39,8 @@ class NotesCubit extends Cubit<NotesState> {
   Future<void> addNote(Note note) async {
     emit(const NotesState.loading());
     try {
+      await Future.delayed(const Duration(milliseconds: 1000));
+
       final updatedNotesList = await _notesService.createOrUpdateNote(note);
       emit(NotesState.loaded(notes: updatedNotesList, didUpdate: false));
     } catch (e) {
@@ -63,6 +65,7 @@ class NotesCubit extends Cubit<NotesState> {
   Future<void> updateNote(Note note) async {
     emit(const NotesState.loading());
     try {
+      await Future.delayed(const Duration(milliseconds: 1000));
       final updatedNotesList = await _notesService.createOrUpdateNote(note);
       emit(NotesState.loaded(notes: updatedNotesList, didUpdate: true));
     } catch (e) {
