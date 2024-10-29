@@ -15,7 +15,7 @@ class NoteDetailScreen extends StatelessWidget {
     return Scaffold(
       body: BlocBuilder<NotesCubit, NotesState>(
         builder: (context, state) {
-          return state.when(
+          return state.maybeWhen(
             initial: () {
               return const Center(
                 child: CircularProgressIndicator.adaptive(),
@@ -24,7 +24,7 @@ class NoteDetailScreen extends StatelessWidget {
             loading: () => const Center(
               child: CircularProgressIndicator.adaptive(),
             ),
-            loaded: (_, note, __) {
+            view: (note) {
               if (note != null) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -45,6 +45,7 @@ class NoteDetailScreen extends StatelessWidget {
             error: (message) => Center(
               child: Text(message),
             ),
+            orElse: () => const SizedBox.shrink(),
           );
         },
       ),

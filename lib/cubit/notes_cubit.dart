@@ -50,9 +50,8 @@ class NotesCubit extends Cubit<NotesState> {
     emit(const NotesState.loading());
     try {
       final note = await _notesService.fetchNoteById(id);
-      emit(NotesState.loaded(
-        notes: [],
-        viewingNote: note,
+      emit(NotesState.view(
+        note: note!,
       ));
     } catch (e) {
       emit(NotesState.error(message: e.toString()));

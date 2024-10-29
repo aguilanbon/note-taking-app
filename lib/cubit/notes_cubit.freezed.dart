@@ -20,28 +20,27 @@ mixin _$NotesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Note> notes, Note? viewingNote, bool? didUpdate)
-        loaded,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
     required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -51,6 +50,7 @@ mixin _$NotesState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -59,6 +59,7 @@ mixin _$NotesState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -67,6 +68,7 @@ mixin _$NotesState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -136,10 +138,9 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Note> notes, Note? viewingNote, bool? didUpdate)
-        loaded,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
     required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
   }) {
     return initial();
   }
@@ -149,9 +150,9 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
   }) {
     return initial?.call();
   }
@@ -161,9 +162,9 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -179,6 +180,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
   }) {
     return initial(this);
   }
@@ -190,6 +192,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
   }) {
     return initial?.call(this);
   }
@@ -201,6 +204,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -257,10 +261,9 @@ class _$LoadingImpl implements _Loading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Note> notes, Note? viewingNote, bool? didUpdate)
-        loaded,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
     required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
   }) {
     return loading();
   }
@@ -270,9 +273,9 @@ class _$LoadingImpl implements _Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
   }) {
     return loading?.call();
   }
@@ -282,9 +285,9 @@ class _$LoadingImpl implements _Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -300,6 +303,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
   }) {
     return loading(this);
   }
@@ -311,6 +315,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
   }) {
     return loading?.call(this);
   }
@@ -322,6 +327,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -341,9 +347,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Note> notes, Note? viewingNote, bool? didUpdate});
-
-  $NoteCopyWith<$Res>? get viewingNote;
+  $Res call({List<Note> notes, bool? didUpdate});
 }
 
 /// @nodoc
@@ -360,7 +364,6 @@ class __$$LoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notes = null,
-    Object? viewingNote = freezed,
     Object? didUpdate = freezed,
   }) {
     return _then(_$LoadedImpl(
@@ -368,37 +371,18 @@ class __$$LoadedImplCopyWithImpl<$Res>
           ? _value._notes
           : notes // ignore: cast_nullable_to_non_nullable
               as List<Note>,
-      viewingNote: freezed == viewingNote
-          ? _value.viewingNote
-          : viewingNote // ignore: cast_nullable_to_non_nullable
-              as Note?,
       didUpdate: freezed == didUpdate
           ? _value.didUpdate
           : didUpdate // ignore: cast_nullable_to_non_nullable
               as bool?,
     ));
   }
-
-  /// Create a copy of NotesState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $NoteCopyWith<$Res>? get viewingNote {
-    if (_value.viewingNote == null) {
-      return null;
-    }
-
-    return $NoteCopyWith<$Res>(_value.viewingNote!, (value) {
-      return _then(_value.copyWith(viewingNote: value));
-    });
-  }
 }
 
 /// @nodoc
 
 class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl(
-      {required final List<Note> notes, this.viewingNote, this.didUpdate})
+  const _$LoadedImpl({required final List<Note> notes, this.didUpdate})
       : _notes = notes;
 
   final List<Note> _notes;
@@ -410,13 +394,11 @@ class _$LoadedImpl implements _Loaded {
   }
 
   @override
-  final Note? viewingNote;
-  @override
   final bool? didUpdate;
 
   @override
   String toString() {
-    return 'NotesState.loaded(notes: $notes, viewingNote: $viewingNote, didUpdate: $didUpdate)';
+    return 'NotesState.loaded(notes: $notes, didUpdate: $didUpdate)';
   }
 
   @override
@@ -425,15 +407,13 @@ class _$LoadedImpl implements _Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._notes, _notes) &&
-            (identical(other.viewingNote, viewingNote) ||
-                other.viewingNote == viewingNote) &&
             (identical(other.didUpdate, didUpdate) ||
                 other.didUpdate == didUpdate));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_notes), viewingNote, didUpdate);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_notes), didUpdate);
 
   /// Create a copy of NotesState
   /// with the given fields replaced by the non-null parameter values.
@@ -448,12 +428,11 @@ class _$LoadedImpl implements _Loaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Note> notes, Note? viewingNote, bool? didUpdate)
-        loaded,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
     required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
   }) {
-    return loaded(notes, viewingNote, didUpdate);
+    return loaded(notes, didUpdate);
   }
 
   @override
@@ -461,11 +440,11 @@ class _$LoadedImpl implements _Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
   }) {
-    return loaded?.call(notes, viewingNote, didUpdate);
+    return loaded?.call(notes, didUpdate);
   }
 
   @override
@@ -473,13 +452,13 @@ class _$LoadedImpl implements _Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(notes, viewingNote, didUpdate);
+      return loaded(notes, didUpdate);
     }
     return orElse();
   }
@@ -491,6 +470,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
   }) {
     return loaded(this);
   }
@@ -502,6 +482,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
   }) {
     return loaded?.call(this);
   }
@@ -513,6 +494,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -524,12 +506,9 @@ class _$LoadedImpl implements _Loaded {
 
 abstract class _Loaded implements NotesState {
   const factory _Loaded(
-      {required final List<Note> notes,
-      final Note? viewingNote,
-      final bool? didUpdate}) = _$LoadedImpl;
+      {required final List<Note> notes, final bool? didUpdate}) = _$LoadedImpl;
 
   List<Note> get notes;
-  Note? get viewingNote;
   bool? get didUpdate;
 
   /// Create a copy of NotesState
@@ -609,10 +588,9 @@ class _$ErrorImpl implements _Error {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(
-            List<Note> notes, Note? viewingNote, bool? didUpdate)
-        loaded,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
     required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
   }) {
     return error(message);
   }
@@ -622,9 +600,9 @@ class _$ErrorImpl implements _Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
   }) {
     return error?.call(message);
   }
@@ -634,9 +612,9 @@ class _$ErrorImpl implements _Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<Note> notes, Note? viewingNote, bool? didUpdate)?
-        loaded,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
     TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -652,6 +630,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
   }) {
     return error(this);
   }
@@ -663,6 +642,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
     TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
   }) {
     return error?.call(this);
   }
@@ -674,6 +654,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -692,5 +673,178 @@ abstract class _Error implements NotesState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ViewImplCopyWith<$Res> {
+  factory _$$ViewImplCopyWith(
+          _$ViewImpl value, $Res Function(_$ViewImpl) then) =
+      __$$ViewImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Note? note});
+
+  $NoteCopyWith<$Res>? get note;
+}
+
+/// @nodoc
+class __$$ViewImplCopyWithImpl<$Res>
+    extends _$NotesStateCopyWithImpl<$Res, _$ViewImpl>
+    implements _$$ViewImplCopyWith<$Res> {
+  __$$ViewImplCopyWithImpl(_$ViewImpl _value, $Res Function(_$ViewImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of NotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? note = freezed,
+  }) {
+    return _then(_$ViewImpl(
+      note: freezed == note
+          ? _value.note
+          : note // ignore: cast_nullable_to_non_nullable
+              as Note?,
+    ));
+  }
+
+  /// Create a copy of NotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $NoteCopyWith<$Res>? get note {
+    if (_value.note == null) {
+      return null;
+    }
+
+    return $NoteCopyWith<$Res>(_value.note!, (value) {
+      return _then(_value.copyWith(note: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$ViewImpl implements _View {
+  const _$ViewImpl({required this.note});
+
+  @override
+  final Note? note;
+
+  @override
+  String toString() {
+    return 'NotesState.view(note: $note)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ViewImpl &&
+            (identical(other.note, note) || other.note == note));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, note);
+
+  /// Create a copy of NotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ViewImplCopyWith<_$ViewImpl> get copyWith =>
+      __$$ViewImplCopyWithImpl<_$ViewImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<Note> notes, bool? didUpdate) loaded,
+    required TResult Function(String message) error,
+    required TResult Function(Note? note) view,
+  }) {
+    return view(note);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<Note> notes, bool? didUpdate)? loaded,
+    TResult? Function(String message)? error,
+    TResult? Function(Note? note)? view,
+  }) {
+    return view?.call(note);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<Note> notes, bool? didUpdate)? loaded,
+    TResult Function(String message)? error,
+    TResult Function(Note? note)? view,
+    required TResult orElse(),
+  }) {
+    if (view != null) {
+      return view(note);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_Error value) error,
+    required TResult Function(_View value) view,
+  }) {
+    return view(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_View value)? view,
+  }) {
+    return view?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_Error value)? error,
+    TResult Function(_View value)? view,
+    required TResult orElse(),
+  }) {
+    if (view != null) {
+      return view(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _View implements NotesState {
+  const factory _View({required final Note? note}) = _$ViewImpl;
+
+  Note? get note;
+
+  /// Create a copy of NotesState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ViewImplCopyWith<_$ViewImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

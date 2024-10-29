@@ -22,7 +22,7 @@ class AddEditNoteScreen extends StatelessWidget {
         child: BlocConsumer<NotesCubit, NotesState>(
           listener: (context, state) {
             state.maybeWhen(
-                loaded: (_, __, didUpdate) {
+                loaded: (_, didUpdate) {
                   if (didUpdate != null) {
                     if (didUpdate) {
                       ScaffoldMessenger.of(context).showSnackBar(

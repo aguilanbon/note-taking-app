@@ -21,7 +21,7 @@ class NotesListScreen extends StatelessWidget {
         body: SafeArea(
           child: BlocBuilder<NotesCubit, NotesState>(
             builder: (context, state) {
-              return state.when(
+              return state.maybeWhen(
                 initial: () {
                   return const Center(
                     child: CircularProgressIndicator.adaptive(),
@@ -30,7 +30,7 @@ class NotesListScreen extends StatelessWidget {
                 loading: () => const Center(
                   child: CircularProgressIndicator.adaptive(),
                 ),
-                loaded: (notes, _, __) {
+                loaded: (notes, _) {
                   if (notes.isEmpty) {
                     return const Center(
                       child: Text(
@@ -116,6 +116,7 @@ class NotesListScreen extends StatelessWidget {
                   );
                 },
                 error: (message) => Text(message),
+                orElse: () => const SizedBox.shrink(),
               );
             },
           ),
